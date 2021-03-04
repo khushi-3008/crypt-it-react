@@ -19,5 +19,5 @@ function createWindow() {
         mainWindow = null;
     });
 }
-//hii
+
 app.on('ready', createWindow);
