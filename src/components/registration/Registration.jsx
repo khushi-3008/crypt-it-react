@@ -14,7 +14,7 @@ const Registration = ({ submitForm }) => {
       <form onSubmit={handleSubmit} className='form' noValidate>
         <h1>
           Get started with us today! Create your account by filling out the
-          information below.
+          information mentioned below.
         </h1>
         <div className='form-inputs'>
           <label className='form-label'>Username</label>
@@ -28,7 +28,7 @@ const Registration = ({ submitForm }) => {
           />
           {errors.username && <p>{errors.username}</p>}
         </div>
-        <div className='form-inputs'>
+        {/* <div className='form-inputs'>
           <label className='form-label'>Email</label>
           <input
             className='form-input'
@@ -39,7 +39,7 @@ const Registration = ({ submitForm }) => {
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>}
-        </div>
+        </div> */}
         <div className='form-inputs'>
           <label className='form-label'>Password</label>
           <input
@@ -67,9 +67,9 @@ const Registration = ({ submitForm }) => {
         <button className='form-input-btn' type='submit'>
           Sign up
         </button>
-        <span className='form-input-login'>
+        {/* <span className='form-input-login'>
           Already have an account? Login <a href='#'>here</a>
-        </span>
+        </span> */}
       </form>
     </div>
   );
