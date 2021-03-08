@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
-
 import App from './App';
-// import Registration from "./components/registration/Registration";
+import Login from './components/login/Login';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Route path="/" exact component={App} />
-      {/* <Route path="/registration" exact component={Registration} /> */}
+      <Route path="/login" exact component={Login} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

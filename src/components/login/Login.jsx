@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './Form.css';
-import FormSignup from './Registration';
-import Login from '../login/Login';
+import './login.css';
+import FormLogin from './LoginForm';
+import loginSuccess from './loginSuccess.jsx';
 
-const Form = () => {
+const Login = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function submitForm() {
@@ -15,16 +15,16 @@ const Form = () => {
         <span className='close-btn'>×</span>
         <div className='form-content-left'>
           {/* <img className='form-img' src='public/logo192.png' alt='spaceships' /> */}
-          <h1 style={{textAlign: 'center'}} >Welcome, Crypt-it</h1>
+          <h1 style={{textAlign: 'center'}} >Welcome to Crypt-it</h1>
         </div>
         {!isSubmitted ? (
-          <FormSignup submitForm={submitForm} />
+          <FormLogin submitForm={submitForm} />
         ) : (
-          <Login/>
+          <loginSuccess />
         )}
       </div>
     </>
   );
 };
 
-export default Form;
+export default Login;

@@ -1,20 +1,19 @@
 import React from 'react';
-import validate from './validateInfo';
-import useForm from './useForm';
-import './Form.css';
+import validateLogin from './validateLogin';
+import useLoginForm from './useLoginForm';
+import './login.css';
 
-const Registration = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+const LoginForm = ({ submitForm }) => {
+  const { handleChange, handleSubmit, values, errors } = useLoginForm(
     submitForm,
-    validate
+    validateLogin
   );
 
   return (
     <div className='form-content-right'>
       <form onSubmit={handleSubmit} className='form' noValidate>
         <h1>
-          Get started with us today! Create your account by filling out the
-          information mentioned below.
+          SignIn
         </h1>
         <div className='form-inputs'>
           <label className='form-label'>Username</label>
@@ -40,7 +39,7 @@ const Registration = ({ submitForm }) => {
           />
           {errors.password && <p>{errors.password}</p>}
         </div>
-        <div className='form-inputs'>
+        {/* <div className='form-inputs'>
           <label className='form-label'>Confirm Password</label>
           <input
             className='form-input'
@@ -51,7 +50,7 @@ const Registration = ({ submitForm }) => {
             onChange={handleChange}
           />
           {errors.password2 && <p>{errors.password2}</p>}
-        </div>
+        </div> */}
         <button className='form-input-btn' type='submit'>
           Sign up
         </button>
@@ -60,4 +59,4 @@ const Registration = ({ submitForm }) => {
   );
 };
 
-export default Registration;
+export default LoginForm;
