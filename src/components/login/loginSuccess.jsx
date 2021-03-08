@@ -1,7 +1,7 @@
 import React from 'react';
 import './login.css';
 
-const loginSuccess = () => {
+const LoginSuccess = () => {
   return (
       <div className='form-content-left'>
         <h1 className='form-success'>Signed In Successfully</h1>
@@ -11,4 +11,4 @@ const loginSuccess = () => {
   );
 };
 
-export default loginSuccess;
+export default LoginSuccess;

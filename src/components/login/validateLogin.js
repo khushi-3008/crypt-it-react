@@ -6,11 +6,9 @@ export default function validateLogin(values) {
     }
 
 
-    if (values.password == "khushi") {
-        alert("Signed in successfully");
-    } else {
-        errors.password = 'Incorrect password. Try again.';
-    }
+    if (values.password !== "khushi") {
+        errors.password = "Incorrect password. Try again. ";
+    } 
 
     return errors;
 }
