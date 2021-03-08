@@ -10,7 +10,7 @@ const LoginForm = ({ submitForm }) => {
   );
 
   return (
-    <div className='form-content-right'>
+    <div className='form-content-left'>
       <form onSubmit={handleSubmit} className='form' noValidate>
         <h1>
           SignIn
