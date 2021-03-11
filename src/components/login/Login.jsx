@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router';
 import './login.css';
 import FormLogin from './LoginForm';
 import LoginSuccess from './LoginSuccess';
@@ -16,7 +17,7 @@ const Login = () => {
         {!isSubmitted ? (
           <FormLogin submitForm={submitForm} />
         ) : (
-          <LoginSuccess />
+          <Redirect to="/dashboard"/>
         )}
         <div className='form-content-right'>
           {/* <img className='form-img' src='public/logo192.png' alt='spaceships' /> */}
