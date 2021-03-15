@@ -2,15 +2,23 @@ import './dashboard.css';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import { Redirect } from 'react-router';
+import React from 'react';
+import { Redirect , Route } from "react-router-dom";
+import { render } from 'react-dom';
+import { History } from "react-router-dom";
+
+
 
 function Dashboard(){
-    let text = '<p>home</p>'
     return(
         <>
         <SideNav
             onSelect ={(selected) => {
-                console.log(selected);
+                   return(
+                    <>
+                    <Redirect to="/login"/>
+                    </>
+                   )                
         }}
         >
         <SideNav.Toggle />
@@ -25,7 +33,7 @@ function Dashboard(){
                 </NavItem>
                 <NavItem eventKey="charts">
                 <NavIcon>
-                    <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+                    <i className="fa fa-fw fa-search" style={{ fontSize: '1.75em' }} />
                 </NavIcon>
                 <NavText>
                     Charts

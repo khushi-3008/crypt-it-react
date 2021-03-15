@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import './login.css';
 import FormLogin from './LoginForm';
-import LoginSuccess from './LoginSuccess';
 
 const Login = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
