@@ -9,7 +9,7 @@ const StyledSideNav = styled.div`
     z-index: 1;      /* Stay on top of everything */
     top: 3.4em;      /* Stay at the top */
     background-color: rgb(40, 40, 40); /* Black */
-    overflow-x: hidden;     /* Disable horizontal scroll */
+    overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 10px;
 `;
 
@@ -20,21 +20,21 @@ class SideNav extends React.Component {
             activePath: props.location.pathname,
             items: [
                 {
-                  path: '/', /* path is used as id to check which NavItem is active basically */
-                  name: 'Home',
-                  css: 'fa fa-fw fa-home',
+                  path: '/encryption', /* path is used as id to check which NavItem is active basically */
+                  name: 'Encryption',
+                  css: 'fa fa-fw fa-lock',
                   key: 1 /* Key is required, else console throws error. */
                 },
                 {
-                  path: '/about',
-                  name: 'About',
-                  css: 'fa fa-fw fa-clock',
+                  path: '/',
+                  name: 'Decryption',
+                  css: 'fa fa-fw fa-unlock-alt',
                   key: 2
                 },
                 {
-                  path: '/NoMatch',
-                  name: 'NoMatch',
-                  css: 'fas fa-hashtag',
+                  path: '/',
+                  name: 'Files',
+                  css: 'fas fa-file-alt',
                   key: 3
                 },
               ]
