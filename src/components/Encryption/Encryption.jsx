@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
 import './encryption.css';
+import Encrypt from './Encrypt';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -24,20 +25,42 @@ const Background = styled.div`
   background: rgb(39, 176, 255);
 `;
 
-const Encryption = (props) => (
-    <Background>
-    <NavigationBar/>
-    <Sidebar/>
-    <GridWrapper>
-        <div className="drag-area">
-            <div className="icon"><i className="fas fa-cloud-upload-alt"></i></div>
-            <header>Drag & Drop to Upload File</header>
-            <span>OR</span>
-            <button>Browse File</button>
-            <input type="file" hidden></input>
-        </div>
-    </GridWrapper>
-  </Background>
-)
 
+
+const Encryption = props => {
+  // Create a reference to the hidden file input element
+  const hiddenFileInput = React.useRef(null);
+  
+  // Programatically click the hidden file input element
+  // when the Button component is clicked
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+  // Call a function (passed as a prop from the parent component)
+  // to handle the user-selected file 
+  const handleChange = event => {
+    const fileUploaded = event.target.files[0].name;
+      console.log(fileUploaded);
+      const test = new Encrypt('hello');
+      test.encrypt(fileUploaded,'./enc/'+{fileUploaded}+'.enc');
+  };
+
+  return (
+    <>
+    <Background>
+      <NavigationBar/>
+      <Sidebar/>
+      <GridWrapper>
+          <div className="drag-area">
+              <div className="icon"><i className="fas fa-cloud-upload-alt"></i></div>
+              <header>Drag & Drop to Upload File</header>
+              <span>OR</span>
+              <button onClick={handleClick}>Browse File</button>
+              <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{display: 'none'}}></input>
+          </div>
+      </GridWrapper>
+    </Background>
+  </>
+  );
+}
 export default Encryption;

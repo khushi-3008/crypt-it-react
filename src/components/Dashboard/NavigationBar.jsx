@@ -13,7 +13,7 @@ const Styles = styled.div`
 `;
 export const NavigationBar = () => (
   <Navbar fixed="top" bg="dark" variant="dark">
-    <Navbar.Brand style={{fontSize: 20 } , {marginLeft: -10}}>Crypt-it</Navbar.Brand>
+    <Navbar.Brand style={{fontSize: '100px' } , {marginLeft: -7}}>Crypt-it</Navbar.Brand>
     <Styles>
       <Form className="form-center">
           <FormControl type="text" placeholder="Search" className="" />
