@@ -4,11 +4,11 @@ import React from 'react';
 import { NavigationBar } from './NavigationBar';
 import Sidebar from './Sidebar';
 
-function Dashboard(){
-    return(
+function Dashboard() {
+    return (
         <>
-        <NavigationBar/>
-        <Sidebar/>
+            <NavigationBar />
+            <Sidebar />
         </>
     )
 }

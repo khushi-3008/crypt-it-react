@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
 import './encryption.css';
-import Encrypt from './Encrypt';
+const electron = window.require('electron');
+// const { shell } = window.require('electron');
+const remote = electron.remote
+const { dialog } = remote
+const { ipcRenderer } = window.require('electron');
 
 const GridWrapper = styled.div`
   display: grid;
@@ -28,39 +32,33 @@ const Background = styled.div`
 
 
 const Encryption = props => {
-  // Create a reference to the hidden file input element
-  const hiddenFileInput = React.useRef(null);
-  
-  // Programatically click the hidden file input element
-  // when the Button component is clicked
-  const handleClick = event => {
-    hiddenFileInput.current.click();
-  };
-  // Call a function (passed as a prop from the parent component)
-  // to handle the user-selected file 
-  const handleChange = event => {
-    const fileUploaded = event.target.files[0].name;
-      console.log(fileUploaded);
-      const test = new Encrypt('hello');
-      test.encrypt(fileUploaded,'./enc/'+{fileUploaded}+'.enc');
-  };
-
   return (
     <>
-    <Background>
-      <NavigationBar/>
-      <Sidebar/>
-      <GridWrapper>
+      <Background>
+        <NavigationBar />
+        <Sidebar />
+        <GridWrapper>
           <div className="drag-area">
-              <div className="icon"><i className="fas fa-cloud-upload-alt"></i></div>
-              <header>Drag & Drop to Upload File</header>
-              <span>OR</span>
-              <button onClick={handleClick}>Browse File</button>
-              <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{display: 'none'}}></input>
+            <div className="icon"><i className="fas fa-cloud-upload-alt"></i></div>
+            <header>Drag & Drop to Upload File</header>
+            <span>OR</span>
+            <button onClick={() => {
+              dialog.showOpenDialog(
+                {
+                  title: 'Open File',
+                  message: 'First Dialog',
+                  //pass 'openDirectory' to strictly open directories
+                  properties: ['openFile']
+                }
+              ).then(result => {
+                ipcRenderer.send('anything-asynchronous', result.filePaths[0]);
+              });
+            }}>Select File</button>
+            {/* <button onClick={handleClick}>Browse File</button> */}
           </div>
-      </GridWrapper>
-    </Background>
-  </>
+        </GridWrapper>
+      </Background>
+    </>
   );
 }
 export default Encryption;
