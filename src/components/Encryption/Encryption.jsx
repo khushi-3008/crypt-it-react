@@ -51,7 +51,7 @@ const Encryption = props => {
                   properties: ['openFile']
                 }
               ).then(result => {
-                ipcRenderer.send('anything-asynchronous', result.filePaths[0]);
+                ipcRenderer.send('encrypt', result.filePaths[0]);
               });
             }}>Select File</button>
             {/* <button onClick={handleClick}>Browse File</button> */}

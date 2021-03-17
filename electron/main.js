@@ -44,7 +44,11 @@ if (!fs.existsSync(cryptitHome)) {
 
 app.on('ready', createWindow);
 
-ipcMain.on('anything-asynchronous', (event, arg) => {
+ipcMain.on('encrypt', (event, arg) => {
     //execute tasks on behalf of renderer process 
     console.log(arg) // prints "ping"
+});
+
+ipcMain.on('close', (event, arg) => {
+    app.quit();
 });
