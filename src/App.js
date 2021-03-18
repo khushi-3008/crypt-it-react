@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Form from './components/registration/Form';
-// import Dashboard from './components/Dashboard/Dashboard';
+// import Form from './components/registration/Form';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
-  return <Form />;
+  return <Dashboard/>;
 }
 
 export default App;
