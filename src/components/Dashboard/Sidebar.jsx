@@ -28,11 +28,11 @@ class SideNav extends React.Component {
                 {
                   path: '/',
                   name: 'Decryption',
-                  css: 'fa fa-fw fa-unlock-alt',
+                  css: 'far fa-eye',
                   key: 2
                 },
                 {
-                  path: '/',
+                  path: '/files',
                   name: 'Files',
                   css: 'fas fa-file-alt',
                   key: 3

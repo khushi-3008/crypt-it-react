@@ -45,15 +45,16 @@ const Encryption = props => {
             <button onClick={() => {
               dialog.showOpenDialog(
                 {
-                  title: 'Open File',
+                  title: 'Select File',
                   message: 'First Dialog',
+                  buttonLabel: "Select",
                   //pass 'openDirectory' to strictly open directories
                   properties: ['openFile']
                 }
               ).then(result => {
                 ipcRenderer.send('encrypt', result.filePaths[0]);
               });
-            }}>Select File</button>
+            }}>Browse File</button>
             {/* <button onClick={handleClick}>Browse File</button> */}
           </div>
         </GridWrapper>

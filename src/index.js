@@ -5,6 +5,7 @@ import App from './App';
 import Login from './components/login/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import Encryption from './components/Encryption/Encryption';
+import Files from './components/Files/Files';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route path="/login" exact component={Login} />
       <Route path="/dashboard" exact component={Dashboard}/>
       <Route path="/encryption" exact component={Encryption}/>
+      <Route path="/files" exact component={Files}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
