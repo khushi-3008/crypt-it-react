@@ -24,17 +24,12 @@ const GridWrapper = styled.div`
 class Files extends React.Component {
     render() {
         function card() {
-
-            // Async message handler
-            ipcRenderer.on('asynchronous-reply', (event, arg) => {
-                for (let index = 0; index < arg.length; index++) {
-                    const element = arg[index];
-                    console.log(element+'khushi');
+            ipcRenderer.send('get-files', 'async ping');
+            ipcRenderer.on('encfiles', (event , Files)=>{
+                for (let index = 0; index < Files.length; index++) {
+                    document.querySelector('#result').innerHTML = `Files: ${Files}`
                 }
             })
-
-            // Async message sender
-            ipcRenderer.send('get-files', 'async ping')
         }
 
         return (
@@ -45,7 +40,7 @@ class Files extends React.Component {
                     <button onClick={()=>{
                         card()
                     }}>Console</button>
-
+                    <h1 id={"result"}></h1>
                 </GridWrapper>
             </>
         );

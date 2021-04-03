@@ -54,12 +54,11 @@ ipcMain.on('get-files', (event, arg) => {
             Files[index]=element;
             console.log(element);
         }
+        mainWindow.webContents.send('encfiles', Files);
         // files.forEach(file => {
         //     console.log(file);
         // });
     });
-
-    event.sender.send('asynchronous-reply', Files)
 })
 
 ipcMain.on('encrypt', (event, arg) => {
