@@ -4,7 +4,8 @@ import Form from './components/registration/Form';
 // import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
-  return <Form/>;
+  return <Form />;
+  //hello;
 }
 
 export default App;
