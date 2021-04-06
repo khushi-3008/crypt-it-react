@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Display.css";
 import Sidebar from '../Dashboard/Sidebar';
 import { NavigationBar } from '../Dashboard/NavigationBar';
@@ -21,14 +21,14 @@ export default function Card(props) {
     const card_category = {
         fontFamily: " 'Courier New', Courier, monospace",
         textTransform: "uppercase",
-        fontSize: "2vh",
+        fontSize: "1.5vh",
         letterSpacing: "2px",
         fontWeight: "500",
         color: "#868686",
     };
     const card_title = {
         marginTop: "5px",
-        fontSize: "5vh",
+        fontSize: "3vh",
         marginBottom: "1vh",
         fontFamily: "Arial, Helvetica, sans-serif",
     };
@@ -48,7 +48,7 @@ export default function Card(props) {
     const cards = {
         marginTop: "4.4em",
         marginLeft: "6em",
-        marginRight: "5.5em",
+        marginRight: "0em",
     };
 
     return (
@@ -62,7 +62,7 @@ export default function Card(props) {
                         <span className="card_category" style={card_category}>{props.title}</span>
                         <h3 className="class_title" style={card_title}>{props.sname}</h3>
                         <a href={props.link} target="_blank">
-                            <button style={button} onClick={() => {
+                            <button class="button" style={button} onClick={() => {
                                 dialog.showOpenDialog(
                                     {
                                         title: 'Select Location To Decrypt',
