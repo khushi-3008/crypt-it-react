@@ -1,27 +1,29 @@
 import React from 'react';
 import "./Display.css";
 import Card from "./Card";
+import doc from "./doc.png";
+import pdf from "./Images/pdf.png"
 
 function Display() {
     return (
         <>
             <Card
-                imgsrc="./Images/pdf.png"
+                src={pdf}
                 title="PDF File"
                 sname="File.pdf"
             />
             <Card
-                imgsrc="./Images/doc.png"
+                src={doc}
                 title="DOC File"
                 sname="File1.docx"
             />
             <Card
-                imgsrc="./Images/doc.png"
+                src={doc}
                 title="DOC File"
                 sname="File2.docx"
             />
             <Card
-                imgsrc="./Images/doc.png"
+                src={doc}
                 title="DOC File"
                 sname="File5.docx"
             />
