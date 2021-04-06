@@ -37,9 +37,7 @@ class Files extends React.Component {
                 <NavigationBar />
                 <Sidebar />
                 <GridWrapper>
-                    <button onClick={()=>{
-                        card()
-                    }}>Console</button>
+                    {card()}
                     <h1 id={"result"}></h1>
                 </GridWrapper>
             </>
