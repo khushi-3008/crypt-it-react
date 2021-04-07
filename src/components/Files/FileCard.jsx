@@ -9,7 +9,7 @@ const { dialog } = remote
 
 export default function Card(props) {
     const img_style = {
-        height: "25vh",
+        height: "10vh",
         width: "auto"
     };
     const info_style = {
@@ -28,9 +28,11 @@ export default function Card(props) {
     };
     const card_title = {
         marginTop: "5px",
-        fontSize: "3vh",
-        marginBottom: "1vh",
+        marginBottom: "5px",
+        fontSize: "20px",
         fontFamily: "Arial, Helvetica, sans-serif",
+        maxHeight: "25px",
+        overflow: "hidden"
     };
     const button = {
         padding: "5px 8px",
@@ -43,9 +45,11 @@ export default function Card(props) {
         outline: "none",
         width: "100%",
         border: "1px solid black",
+        borderRadius: "5px",
         cursor: "pointer"
     };
     const cards = {
+
         marginTop: "4.4em",
         marginLeft: "6em",
         marginRight: "0em",
@@ -53,15 +57,13 @@ export default function Card(props) {
 
     return (
         <>
-            <NavigationBar />
-            <Sidebar />
             <div className="cards" style={cards}>
                 <div className="card" style={{ backgroundColor: "white" }}>
-                    <img src={this.props.src} alt="mypic" classname="card_img" style={img_style} />
+                    <img src={props.src} alt="mypic" classname="card_img" style={img_style} />
                     <div className="card_info" style={info_style}>
-                        <span className="card_category" style={card_category}>{this.props.title}</span>
-                        <h3 className="class_title" style={card_title}>{this.props.name}</h3>
-                        <a href={this.props.link} target="_blank">
+                        <span className="card_category" style={card_category}>{props.title}</span>
+                        <h3 className="class_title" style={card_title}>{props.name}</h3>
+                        <a href={props.link} target="_blank">
                             <button class="button" style={button} onClick={() => {
                                 dialog.showOpenDialog(
                                     {

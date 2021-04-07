@@ -24,41 +24,28 @@ const GridWrapper = styled.div`
 `;
 
 class Files extends React.Component {
-    render() {
-        let fileList = new Array();
 
-        function card(){
-            ipcRenderer.send('get-files', 'async ping');
-            ipcRenderer.on('encfiles', (event , Files)=>{
-            for (let index = 0; index < Files.length; index++) {
-                fileList[index] = Files[index];
-                // document.querySelector('#result').innerHTML = `${Files}`
-            }
+    constructor(props) {
+        super(props)
+        ipcRenderer.send('get-files', 'async ping');
+        console.log("getfile");
+        ipcRenderer.on('encfiles', (event, Files) => {
+            let cardList = [];
+            console.log("got files!");
+            Files.forEach(element => {
+                cardList.push(<Card src={doc} title={"doc"} name={element.slice(0, -4)} />)
+            });
+            this.setState({ CardList: cardList });
         })
-        
-        }    
-
-        function newcard(val) {
-            return(
-                // <Card
-                //     src = {doc}
-                //     title = {"docx file"}
-                //     name = {val}
-                // />
-                <h1>hii</h1>
-            );
-        }
-
-        
+    }
+    render() {
         return (
             <>
                 <NavigationBar />
                 <Sidebar />
-                <GridWrapper>
-                    {card()}
-                    {/* {<h1 id={"result"}></h1>} */}
-                    {fileList.map(newcard)}
-                </GridWrapper>
+                {/* <GridWrapper> */}
+                {this.state ? <> {this.state.CardList} </> : null}
+                {/* </GridWrapper> */}
             </>
         );
     }

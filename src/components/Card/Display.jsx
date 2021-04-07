@@ -1,12 +1,17 @@
 import React from 'react';
 import "./Display.css";
-import Card from "./Card";
+import Card from "../Files/FileCard";
+import { NavigationBar } from '../Dashboard/NavigationBar';
+import Sidebar from '../Dashboard/Sidebar';
 import doc from "./Images/doc.png";
 import pdf from "./Images/pdf.png"
 
 function Display() {
     return (
         <>
+            <NavigationBar />
+            <Sidebar />
+
             <Card
                 src={pdf}
                 title="PDF File"

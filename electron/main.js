@@ -1,5 +1,5 @@
 // const Encrypt = require('../src/components/Encryption/Encrypt');
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require('fs');
@@ -46,18 +46,13 @@ app.on('ready', createWindow);
 const encFolder = appdatapath + '\\crypt-it\\enc\\'
 let Files = new Array();
 ipcMain.on('get-files', (event, arg) => {
-    // console.log(encFolder);
-    fs.readdir(encFolder, (err, files) => {
-
-        for (let index = 0; index < files.length; index++) {
-            const element = files[index];
-            Files[index]=element;
-        }
-        mainWindow.webContents.send('encfiles', Files);
-        // files.forEach(file => {
-        //     console.log(file);
-        // });
-    });
+    try {
+        const files = fs.readdirSync(encFolder);
+        mainWindow.webContents.send('encfiles', files);
+    }
+    catch (Err) {
+        mainWindow.webContents.send('encfiles', "Dir Read Error!");
+    }
 })
 
 ipcMain.on('encrypt', (event, arg) => {
@@ -73,6 +68,7 @@ ipcMain.on('encrypt', (event, arg) => {
 });
 
 function Encrypt(key, inFilepPath, outFilePath) {
+    outFilePath = `${outFilePath}.enc`
     // Create an initialization vector
     this.key = key;
     this.algorithm = 'aes-256-ctr';

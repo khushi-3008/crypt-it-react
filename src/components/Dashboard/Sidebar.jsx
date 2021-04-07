@@ -20,24 +20,24 @@ class SideNav extends React.Component {
             activePath: props.location.pathname,
             items: [
                 {
-                  path: '/encryption', /* path is used as id to check which NavItem is active basically */
-                  name: 'Encryption',
-                  css: 'fa fa-fw fa-lock',
-                  key: 1 /* Key is required, else console throws error. */
+                    path: '/encryption', /* path is used as id to check which NavItem is active basically */
+                    name: 'Encryption',
+                    css: 'fa fa-fw fa-lock',
+                    key: 1 /* Key is required, else console throws error. */
                 },
                 {
-                  path: '/cards',
-                  name: 'Decryption',
-                  css: 'far fa-eye',
-                  key: 2
+                    path: '/cards',
+                    name: 'Decryption',
+                    css: 'far fa-eye',
+                    key: 2
                 },
                 {
-                  path: '/files',
-                  name: 'Files',
-                  css: 'fas fa-file-alt',
-                  key: 3
+                    path: '/files',
+                    name: 'Files',
+                    css: 'fas fa-file-alt',
+                    key: 3
                 }
-              ]
+            ]
         }
     }
 
@@ -47,25 +47,25 @@ class SideNav extends React.Component {
 
     render() {
         const { items, activePath } = this.state;
-        return(
+        return (
             <StyledSideNav>
                 {
                     items.map((item) => {
                         return (
                             <>
-                            <NavItem 
-                                path={item.path}
-                                name={item.name}
-                                css={item.css}
-                                onItemClick={this.onItemClick}
-                                active={item.path === activePath}
-                                key={item.key}
-                            ></NavItem>
+                                <NavItem
+                                    path={item.path}
+                                    name={item.name}
+                                    css={item.css}
+                                    onItemClick={this.onItemClick}
+                                    active={item.path === activePath}
+                                    key={item.key}
+                                ></NavItem>
                             </>
                         );
                     })
                 }
-                
+
             </StyledSideNav>
         );
     }
@@ -97,7 +97,7 @@ class NavItem extends React.Component {
 
     render() {
         const { active } = this.props;
-        return(
+        return (
             <StyledNavItem active={active}>
                 <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
                     <NavIcon></NavIcon>

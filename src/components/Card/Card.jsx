@@ -53,8 +53,7 @@ export default function Card(props) {
 
     return (
         <>
-            <NavigationBar />
-            <Sidebar />
+
             <div className="cards" style={cards}>
                 <div className="card" style={{ backgroundColor: "white" }}>
                     <img src={props.src} alt="mypic" classname="card_img" style={img_style} />
