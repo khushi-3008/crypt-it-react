@@ -2,7 +2,9 @@ import React from 'react';
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
 import styled from 'styled-components';
-import { Card } from 'react-bootstrap';
+import Card from './FileCard';
+import doc from "../Card/Images/doc.png";
+import pdf from "../Card/Images/pdf.png"
 const { ipcRenderer } = window.require('electron');
 
 
@@ -23,22 +25,39 @@ const GridWrapper = styled.div`
 
 class Files extends React.Component {
     render() {
-        function card() {
+        let fileList = new Array();
+
+        function card(){
             ipcRenderer.send('get-files', 'async ping');
             ipcRenderer.on('encfiles', (event , Files)=>{
-                for (let index = 0; index < Files.length; index++) {
-                    document.querySelector('#result').innerHTML = `Files: ${Files}`
-                }
-            })
+            for (let index = 0; index < Files.length; index++) {
+                fileList[index] = Files[index];
+                // document.querySelector('#result').innerHTML = `${Files}`
+            }
+        })
+        
+        }    
+
+        function newcard(val) {
+            return(
+                // <Card
+                //     src = {doc}
+                //     title = {"docx file"}
+                //     name = {val}
+                // />
+                <h1>hii</h1>
+            );
         }
 
+        
         return (
             <>
                 <NavigationBar />
                 <Sidebar />
                 <GridWrapper>
                     {card()}
-                    <h1 id={"result"}></h1>
+                    {/* {<h1 id={"result"}></h1>} */}
+                    {fileList.map(newcard)}
                 </GridWrapper>
             </>
         );

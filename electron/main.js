@@ -46,13 +46,12 @@ app.on('ready', createWindow);
 const encFolder = appdatapath + '\\crypt-it\\enc\\'
 let Files = new Array();
 ipcMain.on('get-files', (event, arg) => {
-    console.log(encFolder);
+    // console.log(encFolder);
     fs.readdir(encFolder, (err, files) => {
 
         for (let index = 0; index < files.length; index++) {
             const element = files[index];
             Files[index]=element;
-            console.log(element);
         }
         mainWindow.webContents.send('encfiles', Files);
         // files.forEach(file => {
@@ -68,7 +67,7 @@ ipcMain.on('encrypt', (event, arg) => {
         var filename = arg.replace(/\\$/, '').split('\\').pop();
         var path = encDir + '\\' + filename;
         Encrypt('hello', arg, path);
-        console.log(arg) // prints "ping"
+        // console.log(arg) // prints "ping"
     }
 
 });

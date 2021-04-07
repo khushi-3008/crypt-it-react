@@ -26,7 +26,7 @@ class SideNav extends React.Component {
                   key: 1 /* Key is required, else console throws error. */
                 },
                 {
-                  path: '/',
+                  path: '/cards',
                   name: 'Decryption',
                   css: 'far fa-eye',
                   key: 2
@@ -36,7 +36,7 @@ class SideNav extends React.Component {
                   name: 'Files',
                   css: 'fas fa-file-alt',
                   key: 3
-                },
+                }
               ]
         }
     }
@@ -80,9 +80,9 @@ const StyledNavItem = styled.div`
     margin-bottom: 0;   /* Puts space between NavItems */
     a {
         font-size: 2.4em;
-        color: ${(props) => props.active ? "white" : "rgb(39, 176, 255)"};
+        color: ${(props) => props.active ? "rgb(39, 176, 255)" : "white"};
         :hover {
-            color: white;
+            color: rgb(39, 176, 255) ;
             opacity: 1;
             text-decoration: none; /* Gets rid of underlining of icons */
         }  
