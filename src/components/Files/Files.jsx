@@ -9,18 +9,17 @@ const { ipcRenderer } = window.require('electron');
 
 
 const GridWrapper = styled.div`
-  display: grid;
-  grid-gap: 10px;
-  margin-top: 1em;
-  margin-left: 6em;
-  margin-right: 6em;
-  grid-template-columns: repeat(12, 1fr);
+  ${'' /* display: grid;
+  grid-gap: 10px; */}
+  margin-top: 4.4em;
+  margin-left: 0em;
+  margin-right: 0em;
+  ${'' /* grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: minmax(25px, auto);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  overflow-y: hidden;
+  min-height: 100vh; */}
 `;
 
 class Files extends React.Component {

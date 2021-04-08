@@ -5,18 +5,20 @@ import { NavigationBar } from '../Dashboard/NavigationBar';
 const electron = window.require('electron');
 const remote = electron.remote
 const { dialog } = remote
+const { ipcRenderer } = window.require('electron');
+
 
 
 export default function Card(props) {
     const img_style = {
-        height: "10vh",
+        height: "20vh",
         width: "auto"
     };
     const info_style = {
         borderBottomLeftRadius: "12px",
         borderBottomRightRadius: "12px",
         padding: "16px 24px 24px 24px",
-        objectFit: "contain"
+        // objectFit: "contain"
     };
     const card_category = {
         fontFamily: " 'Courier New', Courier, monospace",
@@ -28,11 +30,10 @@ export default function Card(props) {
     };
     const card_title = {
         marginTop: "5px",
-        marginBottom: "5px",
-        fontSize: "20px",
+        marginBottom: "20px",
+        fontSize: "17px",
         fontFamily: "Arial, Helvetica, sans-serif",
         maxHeight: "25px",
-        overflow: "hidden"
     };
     const button = {
         padding: "5px 8px",
@@ -51,8 +52,7 @@ export default function Card(props) {
     const cards = {
 
         marginTop: "4.4em",
-        marginLeft: "6em",
-        marginRight: "0em",
+        marginLeft: "6em"
     };
 
     return (
@@ -73,7 +73,10 @@ export default function Card(props) {
                                         //pass 'openDirectory' to strictly open directories
                                         properties: ['openDirectory']
                                     }
-                                )
+                                ).then(result => {
+                                    ipcRenderer.send('decrypt', result.filePaths[0], props.name);
+                                    window.location.reload();
+                                });
                             }}>Decrypt</button>
                         </a>
                     </div>

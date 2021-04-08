@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Display.css";
-import Card from "../Files/FileCard";
+import Card from "../Card/Card";
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
 import doc from "./Images/doc.png";
@@ -25,7 +25,7 @@ function Display() {
             <Card
                 src={doc}
                 title="DOC File"
-                sname="File2.docx"
+                sname="File2mayurhurhrri.docx"
             />
             <Card
                 src={doc}

@@ -67,7 +67,7 @@ ipcMain.on('encrypt', (event, arg) => {
 
 });
 
-function Encrypt(key, inFilepPath, outFilePath) {
+function Encrypt(key, inFilePath, outFilePath) {
     outFilePath = `${outFilePath}.enc`
     // Create an initialization vector
     this.key = key;
@@ -76,15 +76,58 @@ function Encrypt(key, inFilepPath, outFilePath) {
     this.iv = Buffer.from(crypto.createHash('sha256').update(String(this.key)).digest('base64')).slice(0, 16);
     // Create a new cipher using the algorithm, key, and iv
     const cipher = crypto.createCipheriv(this.algorithm, this.key, this.iv);
-    var input = fs.createReadStream(inFilepPath);
+    var input = fs.createReadStream(inFilePath);
     var output = fs.createWriteStream(outFilePath);
     input.pipe(cipher).pipe(output);
     output.on('finish', function () {
         // ipcRenderer.send('encryption', output);
         console.log('Encrypted file written to disk!');
     });
+    fs.unlinkSync(inFilePath, (err) => {
+        if (err) throw err;
+        console.log(inFilePath + ' deleted');
+    });
 }
 
+ipcMain.on('decrypt', (event, arg, arg1) => {
+    if (arg === undefined) {
+        return;
+    } else {
+        arg = arg + "\\" + arg1;
+        // var filename = arg.replace(/\\$/, '').split('\\').pop();
+        var path = encFolder + '\\' + `${arg1}.enc`;
+        Decrypt('hello', path, arg);
+        // console.log(arg) // prints "ping"
+    }
+
+});
+
+function Decrypt(key, inFilePath, outFilePath) {
+
+    //Creating cipher key
+    this.key = key;
+    this.algorithm = 'aes-256-ctr';
+    this.key = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
+    this.iv = Buffer.from(crypto.createHash('sha256').update(String(this.key)).digest('base64')).slice(0, 16);
+
+    //decryption process
+    const decipher = crypto.createDecipheriv(this.algorithm, this.key, this.iv)
+    console.log(this.algorithm);
+    console.log(this.key);
+    var input = fs.createReadStream(inFilePath);
+    var output = fs.createWriteStream(outFilePath);
+    // fs.unlinkSync(inFilepPath);
+    fs.unlinkSync(inFilePath, (err) => {
+        if (err) throw err;
+        console.log(inFilePath + ' deleted');
+    });
+    // window.location.reload();
+    input.pipe(decipher).pipe(output);
+    output.on('finish', function () {
+        console.log(outFilePath);
+        console.log('Decrypted file written to disk!');
+    });
+}
 
 ipcMain.on('close', (event, arg) => {
     app.quit();
