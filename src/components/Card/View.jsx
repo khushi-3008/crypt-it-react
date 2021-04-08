@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
 import styled from 'styled-components';
-import Card from './FileCard';
+import Card from './Card';
 
 import ai from "../Images/ai.png";
 import rar from "../Images/rar.png";
@@ -55,7 +55,7 @@ const GridWrapper = styled.div`
   min-height: 100vh; */}
 `;
 
-class Files extends React.Component {
+class View extends React.Component {
 
     constructor(props) {
         super(props)
@@ -198,4 +198,4 @@ class Files extends React.Component {
         );
     }
 }
-export default Files;
+export default View;

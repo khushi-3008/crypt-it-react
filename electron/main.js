@@ -1,4 +1,3 @@
-// const Encrypt = require('../src/components/Encryption/Encrypt');
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
@@ -29,15 +28,21 @@ function createWindow() {
     });
 }
 
+//encryption..
 const appdatapath = process.env['LOCALAPPDATA'];
 const cryptitHome = appdatapath + '\\crypt-it';
 const encDir = appdatapath + '\\crypt-it\\enc';
+const viewDir = appdatapath + '\\crypt-it\\view';
 if (!fs.existsSync(cryptitHome)) {
     fs.mkdirSync(cryptitHome);
     fs.mkdirSync(encDir);
+    fs.mkdirSync(viewDir);
 } else {
     if (!fs.existsSync(encDir)) {
         fs.mkdirSync(encDir);
+    }
+    if (!fs.existsSync(viewDir)) {
+        fs.mkdirSync(viewDir);
     }
 }
 
@@ -89,6 +94,7 @@ function Encrypt(key, inFilePath, outFilePath) {
     });
 }
 
+//Decryption..
 ipcMain.on('decrypt', (event, arg, arg1) => {
     if (arg === undefined) {
         return;
@@ -116,19 +122,66 @@ function Decrypt(key, inFilePath, outFilePath) {
     console.log(this.key);
     var input = fs.createReadStream(inFilePath);
     var output = fs.createWriteStream(outFilePath);
-    // fs.unlinkSync(inFilepPath);
-    fs.unlinkSync(inFilePath, (err) => {
-        if (err) throw err;
-        console.log(inFilePath + ' deleted');
-    });
+
     // window.location.reload();
     input.pipe(decipher).pipe(output);
     output.on('finish', function () {
         console.log(outFilePath);
         console.log('Decrypted file written to disk!');
     });
+
+    // fs.unlinkSync(inFilepPath);
+    fs.unlinkSync(inFilePath, (err) => {
+        if (err) throw err;
+        console.log(inFilePath + ' deleted');
+    });
+}
+
+
+// View Decryption..
+ipcMain.on('viewdecrypt', (event, arg1) => {
+
+    var arg = viewDir + '\\' + arg1;
+    // var filename = arg.replace(/\\$/, '').split('\\').pop();
+    var path = encFolder + '\\' + `${arg1}.enc`;
+    viewDecrypt('hello', path, arg);
+    // console.log(arg) // prints "ping"
+
+
+});
+
+function viewDecrypt(key, inFilePath, outFilePath) {
+
+    //Creating cipher key
+    this.key = key;
+    this.algorithm = 'aes-256-ctr';
+    this.key = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
+    this.iv = Buffer.from(crypto.createHash('sha256').update(String(this.key)).digest('base64')).slice(0, 16);
+
+    //decryption process
+    const decipher = crypto.createDecipheriv(this.algorithm, this.key, this.iv)
+    console.log(this.algorithm);
+    console.log(this.key);
+    var input = fs.createReadStream(inFilePath);
+    var output = fs.createWriteStream(outFilePath);
+
+    // window.location.reload();
+    input.pipe(decipher).pipe(output);
+    output.on('finish', function () {
+        console.log(outFilePath);
+        console.log('Decrypted file written to disk!');
+    });
+
+    shell.exec(outFilePath);
 }
 
 ipcMain.on('close', (event, arg) => {
+    try {
+        fs.rmdirSync(viewDir, { recursive: true });
+
+        console.log(`${viewDir} is deleted!`);
+    } catch (err) {
+        console.error(`Error while deleting ${viewDir}.`);
+    }
     app.quit();
 });

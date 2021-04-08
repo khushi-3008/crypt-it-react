@@ -11,7 +11,7 @@ const { ipcRenderer } = window.require('electron');
 
 export default function Card(props) {
     const img_style = {
-        height: "20vh",
+        height: "25vh",
         width: "auto"
     };
     const info_style = {
@@ -52,13 +52,13 @@ export default function Card(props) {
     const cards = {
 
         marginTop: "4.4em",
-        marginLeft: "6em"
+        marginLeft: "6em",
     };
 
     return (
         <>
             <div className="cards" style={cards}>
-                <div className="card" style={{ backgroundColor: "white" }}>
+                <div className="card" style={{ backgroundColor: "white" }, { height: "45vh" }}>
                     <img src={props.src} alt="mypic" classname="card_img" style={img_style} />
                     <div className="card_info" style={info_style}>
                         <span className="card_category" style={card_category}>{props.title}</span>

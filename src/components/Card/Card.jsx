@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "./Display.css";
-import Sidebar from '../Dashboard/Sidebar';
-import { NavigationBar } from '../Dashboard/NavigationBar';
-const electron = window.require('electron');
-const remote = electron.remote
-const { dialog } = remote
+const { ipcRenderer } = window.require('electron');
 
 
 export default function Card(props) {
@@ -16,7 +12,7 @@ export default function Card(props) {
         borderBottomLeftRadius: "12px",
         borderBottomRightRadius: "12px",
         padding: "16px 24px 24px 24px",
-        objectFit: "contain"
+        // objectFit: "contain"
     };
     const card_category = {
         fontFamily: " 'Courier New', Courier, monospace",
@@ -28,9 +24,10 @@ export default function Card(props) {
     };
     const card_title = {
         marginTop: "5px",
-        fontSize: "3vh",
-        marginBottom: "1vh",
+        marginBottom: "20px",
+        fontSize: "17px",
         fontFamily: "Arial, Helvetica, sans-serif",
+        maxHeight: "25px",
     };
     const button = {
         padding: "5px 8px",
@@ -43,24 +40,32 @@ export default function Card(props) {
         outline: "none",
         width: "100%",
         border: "1px solid black",
+        borderRadius: "5px",
         cursor: "pointer"
     };
     const cards = {
+
         marginTop: "4.4em",
         marginLeft: "6em",
-        marginRight: "0em",
     };
+    function changeCursor(e) {
+        e.target.style.cursor = 'pointer';
+    }
+    function viewfile() {
 
+        ipcRenderer.send('viewdecrypt', props.name);
+
+    }
     return (
         <>
 
             <div className="cards" style={cards}>
-                <div className="card" style={{ backgroundColor: "white" }}>
+                <div className="card" style={{ backgroundColor: "white" }, { height: "40vh" }} onMouseOver={changeCursor} onDoubleClick={viewfile}>
                     <img src={props.src} alt="mypic" classname="card_img" style={img_style} />
                     <div className="card_info" style={info_style}>
                         <span className="card_category" style={card_category}>{props.title}</span>
-                        <h3 className="class_title" style={card_title}>{props.sname}</h3>
-                        <a href={props.link} target="_blank">
+                        <h3 className="class_title" style={card_title}>{props.name}</h3>
+                        {/* <a href={props.link} target="_blank">
                             <button class="button" style={button} onClick={() => {
                                 dialog.showOpenDialog(
                                     {
@@ -71,8 +76,8 @@ export default function Card(props) {
                                         properties: ['openDirectory']
                                     }
                                 )
-                            }}>Decrypt</button>
-                        </a>
+                            }}>View</button>
+                        </a> */}
                     </div>
                 </div>
             </div>

@@ -6,17 +6,17 @@ import Login from './components/login/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import Encryption from './components/Encryption/Encryption';
 import Files from './components/Files/Files';
-import DisplayFiles from './components/Card/Display';
+import DisplayFiles from './components/Card/View';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Route path="/" exact component={App} />
       <Route path="/login" exact component={Login} />
-      <Route path="/dashboard" exact component={Dashboard}/>
-      <Route path="/encryption" exact component={Encryption}/>
-      <Route path="/files" exact component={Files}/>
-      <Route path="/cards" exact component={DisplayFiles}/>
+      <Route path="/dashboard" exact component={Dashboard} />
+      <Route path="/encryption" exact component={Encryption} />
+      <Route path="/files" exact component={Files} />
+      <Route path="/cards" exact component={DisplayFiles} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
