@@ -29,8 +29,6 @@ const Background = styled.div`
   background: rgb(39, 176, 255);
 `;
 
-
-
 const Encryption = props => {
   return (
     <>

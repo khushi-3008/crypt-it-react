@@ -19,7 +19,7 @@ app.whenReady().then(showNotification);
 
 function encryptNotification() {
     const notification = {
-        title: 'Encryption Competed',
+        title: 'Encryption Completed',
         body: 'Your file has been encrypted successfully!!'
     }
     new Notification(notification).show()
