@@ -16,7 +16,7 @@ const Login = () => {
         {!isSubmitted ? (
           <FormLogin submitForm={submitForm} />
         ) : (
-          <Redirect to="/dashboard"/>
+          <Redirect to="/encryption"/>
         )}
         <div className='form-content-right'>
           {/* <img className='form-img' src='public/logo192.png' alt='spaceships' /> */}

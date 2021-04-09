@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "../Card/Display.css";
-import Sidebar from '../Dashboard/Sidebar';
-import { NavigationBar } from '../Dashboard/NavigationBar';
 const electron = window.require('electron');
 const remote = electron.remote
 const { dialog } = remote
@@ -58,12 +56,12 @@ export default function Card(props) {
     return (
         <>
             <div className="cards" style={cards}>
-                <div className="card" style={{ backgroundColor: "white" }, { height: "45vh" }}>
+                <div className="card" style={{ backgroundColor: "white" , height: "45vh" }}>
                     <img src={props.src} alt="mypic" classname="card_img" style={img_style} />
                     <div className="card_info" style={info_style}>
                         <span className="card_category" style={card_category}>{props.title}</span>
                         <h3 className="class_title" style={card_title}>{props.name}</h3>
-                        <a href={props.link} target="_blank">
+                        <a href={props.link} >
                             <button class="button" style={button} onClick={() => {
                                 dialog.showOpenDialog(
                                     {

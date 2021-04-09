@@ -1,8 +1,6 @@
 import React from 'react';
-import { Nav, Navbar, Form, FormControl, Button, Container } from 'react-bootstrap';
+import { Navbar, Form, FormControl} from 'react-bootstrap';
 import styled from 'styled-components';
-const obrackets ="<";
-const cbrackets =">";
 const { ipcRenderer } = window.require('electron');
 const Styles = styled.div`
   .form-center {
@@ -14,7 +12,7 @@ const Styles = styled.div`
 `;
 export const NavigationBar = () => (
   <Navbar fixed="top" bg="dark" variant="dark">
-    <Navbar.Brand onClick={()=>{ipcRenderer.send('close','none');}} style={{fontSize: '100px' } , {marginLeft: -7}}>Crypt-it</Navbar.Brand>
+    <Navbar.Brand onClick={()=>{ipcRenderer.send('close','none')}} style={{fontSize: '100px' } ,{marginLeft: -7}}>Crypt-it</Navbar.Brand>
     {/* <Navbar.Brand style={{fontSize: '100px' } , {marginLeft: -7}}>X</Navbar.Brand> */}
     <Styles>
       <Form className="form-center">

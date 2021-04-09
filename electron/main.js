@@ -3,7 +3,35 @@ const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require('fs');
 const crypto = require("crypto");
+const { shell } = require('electron');
 let mainWindow;
+const { Notification } = require('electron')
+
+function showNotification() {
+    const notification = {
+        title: 'Welcome to Crypt-It',
+        body: 'Get started with it and keep your files safe!'
+    }
+    new Notification(notification).show()
+}
+
+app.whenReady().then(showNotification);
+
+function encryptNotification() {
+    const notification = {
+        title: 'Encryption Competed',
+        body: 'Your file has been encrypted successfully!!'
+    }
+    new Notification(notification).show()
+}
+
+function decryptNotification(outFilePath) {
+    const notification = {
+        title: 'Decryption Competed',
+        body: 'Your file has been decrypted successfully and has been stored to ' + outFilePath
+    }
+    new Notification(notification).show()
+}
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -21,9 +49,17 @@ function createWindow() {
     const startURL = isDev ? 'http://localhost:3000/' : `file://${path.join(__dirname, '../build/index.html')}`;
 
     mainWindow.loadURL(startURL);
-
+    mainWindow.setIcon(path.join(__dirname, '../public/favicon.ico'));
+    mainWindow.maximize();
     mainWindow.once('ready-to-show', () => mainWindow.show());
     mainWindow.on('closed', () => {
+        try {
+            fs.rmdirSync(viewDir, { recursive: true });
+
+            console.log(`${viewDir} is deleted!`);
+        } catch (err) {
+            console.error(`Error while deleting ${viewDir}.`);
+        }
         mainWindow = null;
     });
 }
@@ -87,6 +123,7 @@ function Encrypt(key, inFilePath, outFilePath) {
     output.on('finish', function () {
         // ipcRenderer.send('encryption', output);
         console.log('Encrypted file written to disk!');
+        encryptNotification();
     });
     fs.unlinkSync(inFilePath, (err) => {
         if (err) throw err;
@@ -128,6 +165,7 @@ function Decrypt(key, inFilePath, outFilePath) {
     output.on('finish', function () {
         console.log(outFilePath);
         console.log('Decrypted file written to disk!');
+        decryptNotification(outFilePath);
     });
 
     // fs.unlinkSync(inFilepPath);
@@ -172,16 +210,34 @@ function viewDecrypt(key, inFilePath, outFilePath) {
         console.log('Decrypted file written to disk!');
     });
 
-    shell.exec(outFilePath);
+    shell.openPath(outFilePath);
+    // del(outFilePath);
+
 }
 
-ipcMain.on('close', (event, arg) => {
-    try {
-        fs.rmdirSync(viewDir, { recursive: true });
+// var delInterval = setInterval(del(), 1000);
 
-        console.log(`${viewDir} is deleted!`);
-    } catch (err) {
-        console.error(`Error while deleting ${viewDir}.`);
-    }
+// function del(filePath){
+//     fs.open(filePath, 'r+', function(err, fd){
+//         if (err && err.code === 'EBUSY'){
+//             //do nothing till next loop
+//         } else if (err && err.code === 'ENOENT'){
+//             console.log(filePath, 'deleted');
+//             clearInterval(delInterval);
+//         } else {
+//             fs.close(fd, function(){
+//                 fs.unlink(filePath, function(err){
+//                     if(err){
+//                     } else {
+//                     console.log(filePath, 'deleted');
+//                     clearInterval(delInterval);
+//                     }
+//                 });
+//             });
+//         }
+//     });
+// }
+
+ipcMain.on('close', (event, arg) => {
     app.quit();
 });

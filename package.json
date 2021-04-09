@@ -23,6 +23,7 @@
     "react-scripts": "4.0.3",
     "sass": "^1.32.8",
     "shell.js": "^3.2.3",
+    "shelljs": "^0.8.4",
     "styled-components": "^5.2.1",
     "wait-on": "^5.2.1",
     "web-vitals": "^1.1.0"

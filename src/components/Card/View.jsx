@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
-import styled from 'styled-components';
 import Card from './Card';
 
 import ai from "../Images/ai.png";
@@ -39,21 +38,6 @@ import xml from "../Images/xml.png";
 import zip from "../Images/zip.png";
 
 const { ipcRenderer } = window.require('electron');
-
-
-const GridWrapper = styled.div`
-  ${'' /* display: grid;
-  grid-gap: 10px; */}
-  margin-top: 4.4em;
-  margin-left: 0em;
-  margin-right: 0em;
-  ${'' /* grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(25px, auto);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; */}
-`;
 
 class View extends React.Component {
 
@@ -188,6 +172,7 @@ class View extends React.Component {
             this.setState({ CardList: cardList });
         })
     }
+    
     render() {
         return (
             <>
