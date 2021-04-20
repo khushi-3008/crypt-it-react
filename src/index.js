@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
 import App from './App';
-import Login from './components/login/Login';
+import Login from './components/Login/Login.jsx';
 import Dashboard from './components/Dashboard/Dashboard';
 import Encryption from './components/Encryption/Encryption';
 import Files from './components/Files/Files';

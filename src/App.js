@@ -1,10 +1,10 @@
 import React from 'react';
-import Form from './components/registration/Form';
+import Login from './components/Login/Login';
 import Files from './components/Files/Files';
 
 
 function App() {
-  return <Form />;
+  return <Login />;
   // return <Files />;
   //Hii Mayur!!
 }
