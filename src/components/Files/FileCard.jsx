@@ -5,8 +5,6 @@ const remote = electron.remote
 const { dialog } = remote
 const { ipcRenderer } = window.require('electron');
 
-
-
 export default function Card(props) {
     const img_style = {
         height: "25vh",

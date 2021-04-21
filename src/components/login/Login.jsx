@@ -1,8 +1,15 @@
-import reactIconsFa, { FaChessBishop, FaPlusCircle, FaArrowLeft } from "react-icons/fa";
-import reactIconsRi, { RiMoonClearLine, RiSunLine } from "react-icons/ri";
-import reactJss, { ThemeProvider, withStyles } from "react-jss";
+import { FaChessBishop, FaPlusCircle, FaArrowLeft } from "react-icons/fa";
+import { RiMoonClearLine, RiSunLine } from "react-icons/ri";
+import { ThemeProvider, withStyles } from "react-jss";
 import React, { useState, createContext, useContext } from 'react';
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory, Redirect, Link } from "react-router-dom";
+// import { ipcRenderer } from "electron";
+const electron = window.require('electron');
+const crypto = require("crypto");
+// const { shell } = window.require('electron');
+// const remote = electron.remote
+// const { dialog } = remote
+const { ipcRenderer } = window.require('electron');
 
 const mainTheme = {
     sizes: {
@@ -561,13 +568,13 @@ function RegistrationPage(props) {
                 </div>
 
                 <div style={{ marginTop: '10px' }}>
-                    <Button type="submit" fullWidth>Create account</Button>
+                    <Button type="submit" fullWidth >Create account</Button>
                     <Divider />
                 </div>
 
             </form>
 
-        </div> : <Alert type="success">{response}</Alert>
+        </div> : ipcRenderer.send('password', password)
         }
 
         <Button fullWidth onClick={backToLogin} color="green" iconLeft={<FaArrowLeft />}>Back to log in</Button>
@@ -587,7 +594,7 @@ function LoginPage(props) {
     const [isSuccessed, setSuccess] = useState(false);
 
     const redirectToRegistration = () => {
-        history.push('/registration');
+        history.push('/');
     }
 
     const emailValidate = (value) => {
@@ -597,8 +604,21 @@ function LoginPage(props) {
     }
 
     const passwordValidate = (value) => {
-        if (!value || value.length < 6) return 'Password must be more than 6 characters';
-        return undefined;
+        if (!value || value.length < 6) return 'Please enter the password'
+        else {
+            ipcRenderer.send('validate-password', 'async ping');
+            ipcRenderer.on('validation', (event, password) => {
+                var hash = crypto.getHashes();
+                var hashPwd = crypto.createHash('sha256').update(value).digest('hex');
+                console.log(hashPwd);
+                console.log(password);
+                if(hashPwd===password){
+                    setSuccess(true);
+                    return undefined;
+                }      
+            })
+        }
+        return 'Incorrect Password'
     }
 
 
@@ -613,14 +633,14 @@ function LoginPage(props) {
         if (passwordCheck) errors.push(passwordCheck);
 
         setFormErrors(errors);
-        if (!errors.length) setSuccess(true);
+        
     }
 
     return <div className={classes.loginCard}>
 
         <div style={{ display: 'flex', alignItems: 'center', fontWeight: 100, marginBottom: '25px' }}>
             <FaChessBishop style={{ marginRight: '10px', fontSize: '1.3em', color: '#83afe0' }} />
-            <span>Amazing service</span>
+            <span>Crypt-It</span>
         </div>
 
         <h1 className={classes.cardHeader}>Log in</h1>
@@ -633,7 +653,7 @@ function LoginPage(props) {
                     {formErrors.map(err => <div>{err}</div>)}
                 </Alert> : ''}
 
-                {isSuccessed ? <Alert type="success">Welcome!</Alert> : ''}
+                {isSuccessed ? <><Redirect to='/encryption'/> </> : ''}
 
                 <div name="email" validate={emailValidate}>
                     <Label>

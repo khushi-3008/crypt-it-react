@@ -179,7 +179,9 @@ class Files extends React.Component {
             <>
                 <NavigationBar />
                 <Sidebar />
+                <div style={{background:'#f7fafc'}}>
                 {this.state ? <> {this.state.CardList} </> : null}
+                </div>
             </>
         );
     }

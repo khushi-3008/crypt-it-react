@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {  Link, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const StyledSideNav = styled.div`   
     position: fixed;     /* Fixed Sidebar (stay in place on scroll and position relative to viewport) */
@@ -21,21 +22,27 @@ class SideNav extends React.Component {
             items: [
                 {
                     path: '/encryption', /* path is used as id to check which NavItem is active basically */
-                    name: 'Encryption',
+                    name: 'Encrypt File',
                     css: 'fa fa-fw fa-lock',
                     key: 1 /* Key is required, else console throws error. */
                 },
                 {
                     path: '/cards',
-                    name: 'Decryption',
+                    name: 'View Encrypted Files',
                     css: 'far fa-eye',
                     key: 2
                 },
                 {
                     path: '/files',
-                    name: 'Files',
+                    name: 'Decrypt Files',
                     css: 'fas fa-file-alt',
                     key: 3
+                },
+                {
+                    path: '/login',
+                    name: 'Logout',
+                    css: 'fas fa-power-off',
+                    key: 4
                 }
             ]
         }
@@ -60,6 +67,7 @@ class SideNav extends React.Component {
                                     onItemClick={this.onItemClick}
                                     active={item.path === activePath}
                                     key={item.key}
+
                                 ></NavItem>
                             </>
                         );
@@ -99,9 +107,17 @@ class NavItem extends React.Component {
         const { active } = this.props;
         return (
             <StyledNavItem active={active}>
-                <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
-                    <NavIcon></NavIcon>
-                </Link>
+
+
+                <Tooltip
+                    title={this.props.name}
+                    placement="right"
+                >
+                    <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
+                        <NavIcon></NavIcon>
+                    </Link>
+                </Tooltip>
+
             </StyledNavItem>
         );
     }

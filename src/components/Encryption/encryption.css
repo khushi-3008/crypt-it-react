@@ -1,5 +1,5 @@
 .drag-area{
-  border: 2px dashed #fff;
+  border: 2px dashed black;
   height: 500px;
   width: 700px;
   overflow-y: hidden;
@@ -10,21 +10,21 @@
   flex-direction: column;
 }
 .drag-area.active{
-  border: 2px solid #fff;
+  border: 2px solid black;
 }
 .drag-area .icon{
   font-size: 100px;
-  color: #fff;
+  color: black;
 }
 .drag-area header{
   font-size: 30px;
   font-weight: 500;
-  color: #fff;
+  color: black;
 }
 .drag-area span{
   font-size: 25px;
   font-weight: 500;
-  color: #fff;
+  color: black;
   margin: 10px 0 15px 0;
 }
 .drag-area button{
@@ -33,8 +33,8 @@
   font-weight: 500;
   border: none;
   outline: none;
-  background: #fff;
-  color: #5256ad;
+  background: black;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
 }

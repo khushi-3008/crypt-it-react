@@ -69,16 +69,23 @@ const appdatapath = process.env['LOCALAPPDATA'];
 const cryptitHome = appdatapath + '\\crypt-it';
 const encDir = appdatapath + '\\crypt-it\\enc';
 const viewDir = appdatapath + '\\crypt-it\\view';
+const pwdDir = appdatapath + '\\crypt-it\\info';
+
 if (!fs.existsSync(cryptitHome)) {
     fs.mkdirSync(cryptitHome);
     fs.mkdirSync(encDir);
     fs.mkdirSync(viewDir);
+    fs.mkdirSync(pwdDir);
+
 } else {
     if (!fs.existsSync(encDir)) {
         fs.mkdirSync(encDir);
     }
     if (!fs.existsSync(viewDir)) {
         fs.mkdirSync(viewDir);
+    }
+    if (!fs.existsSync(pwdDir)) {
+        fs.mkdirSync(pwdDir);
     }
 }
 
@@ -215,28 +222,36 @@ function viewDecrypt(key, inFilePath, outFilePath) {
 
 }
 
-// var delInterval = setInterval(del(), 1000);
+ipcMain.on('validate-password', (event, arg) => {
+    try {
+        const pwdsDir = appdatapath + '\\crypt-it\\info\\info.txt';
+        fs.readFile(pwdsDir, 'utf-8', (err, data) => {
+            if(err){
+                alert("An error ocurred reading the file :" + err.message);
+                return;
+            }
+            else{
+                console.log("The file content is : " + data);
+                mainWindow.webContents.send('validation', data);
+            }
+        });
+    }
+    catch (Err) {
+        mainWindow.webContents.send('validation', "Dir Read Error!");
+    }
+})
 
-// function del(filePath){
-//     fs.open(filePath, 'r+', function(err, fd){
-//         if (err && err.code === 'EBUSY'){
-//             //do nothing till next loop
-//         } else if (err && err.code === 'ENOENT'){
-//             console.log(filePath, 'deleted');
-//             clearInterval(delInterval);
-//         } else {
-//             fs.close(fd, function(){
-//                 fs.unlink(filePath, function(err){
-//                     if(err){
-//                     } else {
-//                     console.log(filePath, 'deleted');
-//                     clearInterval(delInterval);
-//                     }
-//                 });
-//             });
-//         }
-//     });
-// }
+ipcMain.on('password',(event,arg)=>{
+
+    var hash = crypto.getHashes();
+    var hashPwd = crypto.createHash('sha256').update(arg).digest('hex');
+    console.log(hashPwd);
+    fs.appendFile(pwdDir+'\\info.txt', hashPwd , function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
+
+})
 
 ipcMain.on('close', (event, arg) => {
     app.quit();

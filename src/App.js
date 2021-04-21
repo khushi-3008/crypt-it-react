@@ -1,7 +1,5 @@
 import React from 'react';
-import Login from './components/Login/Login';
-import Files from './components/Files/Files';
-
+import Login from './components/login/Login';
 
 function App() {
   return <Login />;

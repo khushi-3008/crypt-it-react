@@ -5,6 +5,7 @@
   "main": "./electron/main.js",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
@@ -23,7 +24,6 @@
     "react-jss": "^10.6.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "sass": "^1.32.8",
     "shell.js": "^3.2.3",
     "shelljs": "^0.8.4",
     "styled-components": "^5.2.1",

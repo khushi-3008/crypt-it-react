@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { NavigationBar } from '../Dashboard/NavigationBar';
 import Sidebar from '../Dashboard/Sidebar';
@@ -22,14 +22,16 @@ const GridWrapper = styled.div`
   justify-content: center;
   min-height: 100vh;
   overflow-y: hidden;
-  background: rgb(39, 176, 255);
+  background: #e2eff8;
 `;
 
 const Background = styled.div`
-  background: rgb(39, 176, 255);
+  background: #e2eff8;
 `;
 
-const Encryption = props => {
+class Encryption extends Component{
+  
+  render(){
   return (
     <>
       <Background>
@@ -37,9 +39,9 @@ const Encryption = props => {
         <Sidebar />
         <GridWrapper>
           <div className="drag-area">
-            <div className="icon"><i className="fas fa-cloud-upload-alt"></i></div>
-            <header>Drag & Drop to Upload File</header>
-            <span>OR</span>
+            <div className="icon"><i className="fas fa-cloud-upload-alt" style={{color:'black'}}></i></div>
+            <header style={{color:"black"}}>Drag & Drop to Upload File</header>
+            <span style={{color:"black"}}>OR</span>
             <button onClick={() => {
               dialog.showOpenDialog(
                 {
@@ -52,12 +54,13 @@ const Encryption = props => {
               ).then(result => {
                 ipcRenderer.send('encrypt', result.filePaths[0]);
               });
-            }}>Browse File</button>
+            }} >Browse File</button>
             {/* <button onClick={handleClick}>Browse File</button> */}
           </div>
         </GridWrapper>
       </Background>
     </>
   );
+}
 }
 export default Encryption;
