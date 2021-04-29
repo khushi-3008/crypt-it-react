@@ -53,6 +53,7 @@ class Files extends React.Component {
             Files.forEach(element => {
                 var temp = element.slice(0, -4);
                 var fileType = temp.split('.').pop();
+                fileType = fileType.toLowerCase();
                 switch (fileType) {
                     case "pdf":
                         cardList.push(<Card src={pdf} title={"pdf file"} name={element.slice(0, -4)} />)
@@ -179,8 +180,8 @@ class Files extends React.Component {
             <>
                 <NavigationBar />
                 <Sidebar />
-                <div style={{background:'#f7fafc'}}>
-                {this.state ? <> {this.state.CardList} </> : null}
+                <div style={{ background: '#f7fafc' }}>
+                    {this.state ? <> {this.state.CardList} </> : null}
                 </div>
             </>
         );

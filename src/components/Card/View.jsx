@@ -51,6 +51,7 @@ class View extends React.Component {
             Files.forEach(element => {
                 var temp = element.slice(0, -4);
                 var fileType = temp.split('.').pop();
+                fileType = fileType.toLowerCase();
                 switch (fileType) {
                     case "pdf":
                         cardList.push(<Card src={pdf} title={"pdf file"} name={element.slice(0, -4)} />)
@@ -172,7 +173,7 @@ class View extends React.Component {
             this.setState({ CardList: cardList });
         })
     }
-    
+
     render() {
         return (
             <>
